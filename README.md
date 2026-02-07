@@ -1,28 +1,28 @@
-# CDK Typescript Lambda as ES module with top level awaits
+# 🚀 CDK TypeScript Lambda as ES Module with Top-Level Await
 
 This project demonstrates how to create AWS Lambda functions using ES modules with top-level await support in CDK.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-## Useful commands
+## 📋 Useful Commands
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+* 🔨 `npm run build`   compile typescript to js
+* 👀 `npm run watch`   watch for changes and compile
+* 🧪 `npm run test`    perform the jest unit tests
+* 🚀 `npx cdk deploy`  deploy this stack to your default AWS account/region
+* 🔍 `npx cdk diff`    compare deployed stack with current state
+* 📦 `npx cdk synth`   emits the synthesized CloudFormation template
 
 
-## Deploy eslambda stack
+## 🚢 Deploy eslambda stack
 
 ```bash
 npx cdk deploy EslambdaStack
 ```
 
-## Key Configuration Steps
+## ⚙️ Key Configuration Steps
 
-#### 1. Package.json Configuration
+#### 1️⃣ Package.json Configuration
 Add `"type": "module"` to enable ES module support:
 ```json
 {
@@ -37,12 +37,12 @@ npm install --save-dev tsx
 
 The original CDK templates uses **ts-node**, which doesn't handle ES modules well by default. This is resolved by using **tsx** instead:
 
-* Built from the ground up with ES module support
-* Works seamlessly with "type": "module"
-* Zero configuration needed
-* Faster execution than ts-node with loaders
+* ✅ Built from the ground up with ES module support
+* ✅ Works seamlessly with "type": "module"
+* ✅ Zero configuration needed
+* ✅ Faster execution than ts-node with loaders
 
-#### 2. TypeScript Configuration (tsconfig.json)
+#### 2️⃣ TypeScript Configuration (tsconfig.json)
 Configure TypeScript for ES modules with top-level await:
 ```json
 {
@@ -57,10 +57,10 @@ Configure TypeScript for ES modules with top-level await:
 }
 ```
 
-**Understanding `lib` option:**
-The `"lib"` option specifies which built-in JavaScript/TypeScript type definitions to include. Here we use `"es2022"` which provides all ES2022 standard library types (Promise, Array methods, String methods, etc.). We don't need `"dom"` since this is backend code, not browser code.
+**💡 Understanding `lib` option:**
+The `"lib"` option specifies which built-in JavaScript/TypeScript type definitions to include. Here we use `"es2022"` which provides all ES2022 standard library types (Promise, Array methods, String methods, etc.).
 
-#### 3. CDK Configuration (cdk.json)
+#### 3️⃣ CDK Configuration (cdk.json)
 Update the app command to use `tsx`:
 ```json
 {
@@ -68,7 +68,7 @@ Update the app command to use `tsx`:
 }
 ```
 
-#### 4. Using `--conditions: module` in esbuildArgs
+#### 4️⃣ Using `--conditions: module` in esbuildArgs
 
 The `--conditions` flag tells esbuild which export conditions to use when resolving modules:
 
@@ -78,14 +78,14 @@ esbuildArgs: {
 }
 ```
 
-- **Purpose**: Ensures esbuild uses the ES module exports from dependencies
-- **How it works**: Many npm packages have multiple export formats (CommonJS, ES modules) defined in their `package.json` via conditional exports
-- **Example**: When a package has both `"require"` and `"import"` conditions, `--conditions: module` tells esbuild to prefer the ES module version
-- **Result**: Proper ES module bundling without CommonJS fallbacks, enabling features like top-level await
+- 🎯 **Purpose**: Ensures esbuild uses the ES module exports from dependencies
+- ⚙️ **How it works**: Many npm packages have multiple export formats (CommonJS, ES modules) defined in their `package.json` via conditional exports
+- 📝 **Example**: When a package has both `"require"` and `"import"` conditions, `--conditions: module` tells esbuild to prefer the ES module version
+- ✨ **Result**: Proper ES module bundling without CommonJS fallbacks, enabling features like top-level await
 
 Without this, esbuild might use CommonJS versions of dependencies, which would break ES module semantics.
 
-#### 5. Source Maps
+#### 5️⃣ Source Maps
 
 Source maps enable debugging of TypeScript code in Lambda CloudWatch logs:
 
