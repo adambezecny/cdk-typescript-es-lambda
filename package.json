@@ -1,8 +1,9 @@
 {
   "name": "eslambda",
   "version": "0.1.0",
+  "type": "module",
   "bin": {
-    "eslambda": "bin/eslambda.js"
+    "eslambda": "dist/bin/eslambda.js"
   },
   "scripts": {
     "build": "tsc",
@@ -13,10 +14,10 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
+    "aws-cdk": "2.1000.2",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
-    "aws-cdk": "2.1000.2",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "~5.6.3"
   },
   "dependencies": {
