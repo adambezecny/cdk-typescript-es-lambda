@@ -97,3 +97,7 @@ environment: {
   NODE_OPTIONS: '--enable-source-maps',  // Enable in Lambda runtime
 }
 ```
+
+## Issues
+
+This simply does not work with **aws-xray-sdk** :-( see https://github.com/aws/aws-xray-sdk-node/issues/482
