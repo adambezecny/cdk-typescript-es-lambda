@@ -17,6 +17,9 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 ## 🚢 Deploy eslambda stack
 
 ```bash
+export AWS_ACCESS_KEY_ID="your-access-key"
+export AWS_SECRET_ACCESS_KEY="your-secret-key"
+export AWS_DEFAULT_REGION="eu-central-1"
 npx cdk deploy EslambdaStack
 ```
 
@@ -85,6 +88,8 @@ esbuildArgs: {
 
 Without this, esbuild might use CommonJS versions of dependencies, which would break ES module semantics.
 
+**IMPORTANT NOTE**: this is not really needed, everyhting what is needed is actually here: https://docs.aws.amazon.com/powertools/typescript/2.0.2/upgrade/#unable-to-use-esm
+
 #### 5️⃣ Source Maps
 
 Source maps enable debugging of TypeScript code in Lambda CloudWatch logs:
@@ -100,4 +105,12 @@ environment: {
 
 ## Issues
 
-This simply does not work with **aws-xray-sdk** :-( see https://github.com/aws/aws-xray-sdk-node/issues/482
+Without banner (NodejsFunction->bundling->banner) this simply does not work with **aws-xray-sdk** :-( see: 
+
+* https://github.com/aws/aws-xray-sdk-node/issues/482
+* ultimate solution: https://docs.aws.amazon.com/powertools/typescript/2.0.2/upgrade/#unable-to-use-esm
+
+Error: Cannot find module '@smithy/service-error-classification'\nRequire stack:\n- /var/task/index.mjs
+->
+https://github.com/aws/aws-cdk/issues/33099
+-> cdk.json: set "@aws-cdk/aws-lambda-nodejs:sdkV3ExcludeSmithyPackages": false,  (true->false!)

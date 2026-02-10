@@ -22,8 +22,10 @@ export class EslambdaStack extends cdk.Stack {
         format: cdk.aws_lambda_nodejs.OutputFormat.ESM,
         minify: false,
         sourceMap: true,
+        banner: "import { createRequire } from 'module';const require = createRequire(import.meta.url);",
         esbuildArgs: {
-          '--conditions': 'module',
+          //'--conditions': 'module',  //not needed to suppor ES module, eve thoug AI thinks so:) cruicial is banner here!
+          "--tree-shaking": "true",
         },
       },
       environment: {
